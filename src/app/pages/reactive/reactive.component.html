@@ -1,0 +1,105 @@
+<h4>Formulario de <small> Maestros </small></h4>
+<hr>
+<form autocomplete="off" [formGroup]="form" (ngSubmit)="guardar()">
+
+  <div>
+
+    <div class="form-group row mt-3">
+      <label class="col-2 col-form-label">Nombre Completo</label>
+      <div class="col">
+
+        <input class="form-control" type="text" placeholder="Nombre" formControlName="name"
+          [class.is-invalid]="nombreInvalido">
+        <div *ngIf="nombreInvalido" class="text-danger">
+          El nombre es requerido
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group row mt-3">
+      <label class="col-2 col-form-label">Cédula</label>
+      <div class="col">
+
+        <input class="form-control" type="number" placeholder="Número de Identificación" formControlName="identification_number"
+          [class.is-invalid]="identificacionInvalido">
+        <div *ngIf="identificacionInvalido" class="text-danger">
+          La cédula es requerido
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="form-group row mt-3">
+    <label class="col-2 col-form-label">Teléfono</label>
+    <div class="col">
+
+      <input class="form-control" type="number" placeholder="Teléfono" formControlName="phone"
+        [class.is-invalid]="phoneInvalido">
+      <div *ngIf="phoneInvalido" class="text-danger">
+        El Teléfono es requerido
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group row mt-3" formGroupName="address">
+    <label class="col-2 col-form-label">Dirección</label>
+    <div class="form-row col">
+      <div class="col">
+        <input type="text" class="form-control" placeholder="Barrio" formControlName="barrio"
+          [class.is-invalid]="barrioInvalido">
+        <div *ngIf="barrioInvalido" class="text-danger">
+          La dirección es requerido
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="form-group mt-3">
+    <label class="col-2 col-form-label">&nbsp;</label>
+    <div>
+      <button type="submit" class="btn btn-primary btn-block ">
+        Guardar
+      </button>
+    </div>
+  </div>
+
+  <div class="col">
+    <div class="row">
+      <table class="table">
+        <thead class="thead-dark">
+          <tr>
+            <th>ID</th>
+            <th>Cédula</th>
+            <th>Nombre Completo</th>
+            <th>Teléfono</th>
+            <th>Dirección</th>
+            <th>Opción</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let maestro of listaMaestros; let i = index">
+            <td>{{ i + 1}}</td>
+            <td>
+              {{maestro.nombre}}
+            </td>
+            <td>
+              {{maestro.identificacion}}
+            </td>
+            <td>
+              {{maestro.telefono}}
+            </td>
+            <td>
+              {{maestro.direccion}}
+            </td>
+            <td>
+              <button type="button" class="btn btn-danger" (click)="eliminarMaestro(i)">Borrar</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</form>
+
+
+
